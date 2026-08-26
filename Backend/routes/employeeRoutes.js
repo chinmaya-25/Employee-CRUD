@@ -17,10 +17,10 @@ const router = Router();
 
 router.get("/", authenticate, authorize("ADMIN", "MANAGER"), getEmployees);
 router.post("/", authenticate, authorize("ADMIN"), createEmployee);
-router.get("/stats", getStats);
+router.get("/stats", authenticate, getStats);
 router.get("/:id", authenticate, getEmployeeById);
 router.put("/:id", authenticate, authorize("ADMIN", "MANAGER"), updateEmployee);
 router.delete("/:id", authenticate, authorize("ADMIN"), deleteEmployee);
-router.patch("/:id/status", toggleEmployeeStatus);
+router.patch("/:id/status", authenticate, toggleEmployeeStatus);
 
 export default router;
