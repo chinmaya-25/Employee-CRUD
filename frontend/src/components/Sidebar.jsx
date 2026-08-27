@@ -19,6 +19,10 @@ export default function Sidebar() {
           ) : null}
 
           <li>
+            <NavLink to="/security">Security</NavLink>
+          </li>
+
+          <li>
             <NavLink to="/profile">My Profile</NavLink>
           </li>
         </ul>
