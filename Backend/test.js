@@ -1,27 +1,37 @@
-import prisma from "./config/prisma.js";
+// import prisma from "./config/prisma.js";
 
-// const employee = await prisma.employee.create({
-//   data: {
-//     name: "Admin",
-//     email: "admin@test.com",
-//     password: "admin123",
-//     role: "ADMIN",
-//   },
+// // const employee = await prisma.employee.create({
+// //   data: {
+// //     name: "Admin",
+// //     email: "admin@test.com",
+// //     password: "admin123",
+// //     role: "ADMIN",
+// //   },
+// // });
+
+// // console.log(employee);
+
+// await prisma.role.createMany({
+//   data: [{ name: "ADMIN" }, { name: "MANAGER" }, { name: "EMPLOYEE" }],
 // });
 
-// console.log(employee);
+// await prisma.department.createMany({
+//   data: [
+//     { name: "Engineering" },
+//     { name: "HR" },
+//     { name: "Finance" },
+//     { name: "Sales" },
+//   ],
+// });
 
-await prisma.role.createMany({
-  data: [{ name: "ADMIN" }, { name: "MANAGER" }, { name: "EMPLOYEE" }],
-});
+// await prisma.$disconnect();
 
-await prisma.department.createMany({
-  data: [
-    { name: "Engineering" },
-    { name: "HR" },
-    { name: "Finance" },
-    { name: "Sales" },
-  ],
-});
+import prisma from "./config/prisma.js";
 
-await prisma.$disconnect();
+async function test() {
+  const employee = await prisma.employee.findFirst();
+
+  console.log(employee);
+}
+
+test();
