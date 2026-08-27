@@ -4,6 +4,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Employees from "./pages/Employees";
 import Profile from "./pages/Profile";
+import VerifyMfa from "./pages/VerifyMfa";
+import Security from "./pages/Security";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -11,6 +13,15 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
+      <Route path="/verify-mfa" element={<VerifyMfa />} />
+      <Route
+        path="/security"
+        element={
+          <ProtectedRoute>
+            <Security />
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/dashboard"
         element={

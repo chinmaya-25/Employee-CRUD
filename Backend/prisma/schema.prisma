@@ -4,8 +4,8 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
+  // output   = "../generated/prisma"
 }
 
 datasource db {
@@ -15,37 +15,35 @@ datasource db {
 model Department {
   id        Int        @id @default(autoincrement())
   name      String     @unique
+  createdAt DateTime   @default(now())
 
   employees Employee[]
-
-  createdAt DateTime   @default(now())
 }
 
 model Role {
   id        Int        @id @default(autoincrement())
   name      String     @unique
+  createdAt DateTime   @default(now())
 
   employees Employee[]
-
-  createdAt DateTime   @default(now())
 }
 
 model Employee {
-  id           Int @id @default(autoincrement())
-  name         String
-  email        String @unique
-  password     String
-  salary       Decimal?
-  status       String @default("ACTIVE")
+  id            Int      @id @default(autoincrement())
+  name          String
+  email         String   @unique
+  password      String
+  salary        Decimal?
+  status        String   @default("ACTIVE")
+  mfaEnabled    Boolean  @default(false)
+  mfaSecret     String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  departmentId  Int?
+  roleId        Int
 
-  departmentId Int?
-  roleId       Int
-
-  department   Department? @relation(fields: [departmentId], references: [id])
-  role         Role @relation(fields: [roleId], references: [id])
-
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  department    Department? @relation(fields: [departmentId], references: [id])
+  role          Role @relation(fields: [roleId], references: [id])
 }
 
 enum Status {

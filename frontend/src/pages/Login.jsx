@@ -19,15 +19,19 @@ export default function Login() {
         password,
       });
 
-      localStorage.setItem("token", data.token);
+      if (data.requiresMfa) {
+        localStorage.setItem("pendingUserId", data.userId);
+        navigate("/verify-mfa");
+        return;
+      }
 
+      localStorage.setItem("token", data.token);
       setUser(data.user);
       navigate("/dashboard");
       toast.success("Logged in successfully");
     } catch (error) {
-      toast.error("Login Failed");
-      // alert(error.response?.data?.message || "Login Failed");
       console.error(error);
+      toast.error(error.response?.data?.message || "Login Failed");
     }
   };
 
